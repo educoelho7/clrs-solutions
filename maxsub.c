@@ -49,7 +49,7 @@ int* findCrossing(int* arr, int low, int mid, int high) {
 
     int* result = (int*) malloc(3*sizeof(int));
     result[0] = left, result[1] = right, result[2] = leftSum+rightSum;
-
+    return result;
 }
 
 int* divideAndConquer(int* arr, int low, int high) {    
@@ -58,7 +58,7 @@ int* divideAndConquer(int* arr, int low, int high) {
         elem[0] = low, elem[1] = low, elem[2] = arr[low]; // elem = {low, low, arr[low]}
         return elem;
     } else {
-        int mid = (high-low)/2;
+        int mid = (high+low)/2;
         int* left = divideAndConquer(arr, low, mid);
         int leftsum = left[2];
       
@@ -95,11 +95,11 @@ int main() {
     free(r);
 
     begin = clock();
-    int* r2 = divideAndConquer(arr, 0, SIZE);
+    r = divideAndConquer(arr, 0, SIZE-1);
     end = clock();
     time_spent = (double)(end-begin) / CLOCKS_PER_SEC;
-    printf("(%d, %d, %d, %lf)\n", r2[0], r2[1], r2[2], time_spent);
-    free(r2);
+    printf("(%d, %d, %d, %lf)\n", r[0], r[1], r[2], time_spent);
+    free(r);
 
     return 0;
 }
